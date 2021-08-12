@@ -1,6 +1,6 @@
 const gulp        = require('gulp');
 const browserSync = require('browser-sync');
-const sass        = require('gulp-sass')(require('sass'));
+var sass = require('gulp-sass');
 const cleanCSS = require('gulp-clean-css');
 const autoprefixer = require('gulp-autoprefixer');
 const rename = require("gulp-rename");
@@ -66,3 +66,8 @@ gulp.task('images', function () {
 });
 
 gulp.task('default', gulp.parallel('watch', 'server', 'styles', 'scripts', 'fonts', 'icons', 'mailer', 'html', 'images'));
+
+function watch_all(){
+    gulp.watch("./sass/**/*.sass", gulp.series(mobile_styles, mobile_styles_rtl, desktop_styles, desktop_styles_rtl ));
+}
+exports.watch_all = watch_all;
